@@ -36,6 +36,12 @@ where <package> is the third-party package the user wants to install.
 
 # Running the code
 
+The main notebook used to generate all visualizations for the project is present in `final_notebook` directory. Please run the whole notebook to get the plots.
+
+If a user wants to experiment with the data without touching the main notebook, the .py files present in [`code`](code/) and individual .ipynb files in [`notebooks`](notebooks/) can be used to experiment with
+
+
+
 
 
 
