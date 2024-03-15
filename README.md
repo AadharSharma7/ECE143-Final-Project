@@ -30,7 +30,7 @@ The list of third-party packages we used for this project are
 
 These can be installed in any latest python environment. It is recommended to install [Anaconda](https://www.anaconda.com/download) and then install the packages mentioned above in the conda environment.
 
-The packages can be installed by using the following command in the command prompt, (Or a simple google search of how to install the package in condas will help as well)
+The packages can be installed by using the following command in the command prompt, (Or a simple google search of how to install the package in conda will help as well)
 
 ```shell
 conda install <package>
