@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 df = pd.read_csv('./../data/Portfolio_by_Debt_Size.csv')
 
 # %%
+# Creating indices for dataframe
 years = []
 for id, i in enumerate(df['Unnamed: 0']):
     if id == 0: continue
@@ -16,6 +17,7 @@ amount_lent = {}
 borrowers = {}
 avg = {}
 
+# Seperating borrowers and amount borrowed
 for i in df.columns:
     if i[0] == 'U': continue
     else:
@@ -23,7 +25,7 @@ for i in df.columns:
         borrowers[i] = []
         avg[i] = []
 
-slabs = list(borrowers.keys())
+slabs = list(borrowers.keys()) # Brackets of loan taken
 
 for i in range(1, 28):
     for id, j in enumerate(df.loc[i, :]):
@@ -40,7 +42,7 @@ avg_df = pd.DataFrame(avg, index=years)
 amount_lent_df = pd.DataFrame(amount_lent, index=years)
 borrowers_df = pd.DataFrame(borrowers, index=years)
 
-# %%
+# Violin plot showing the distribution of amount lent in different brackets throughout years
 sns.violinplot(amount_lent_df)
 plt.title("Total amount borrowed in each bracket through years")
 plt.xlabel("Year - Quarter")
