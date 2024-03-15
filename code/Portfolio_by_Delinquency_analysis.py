@@ -1,46 +1,34 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[12]:
-
-
+#Read the sheet of xls file that has relevant data
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 df = pd.read_excel('../data/Portfolio_by_delinquency.xls', sheet_name="FedManagedPortbyDelinquencyStat")
 
 
-# In[13]:
-
-
+#Cleaning the data
 delin_df = df.drop(df.index[-21:])
 delin_df = delin_df.iloc[5:]
 delin_df = delin_df.ffill()
 
 
-# In[14]:
-
-
+#Extracting numbers of borrowers in dataframe
 delin_borrowers_df = delin_df.drop(delin_df.columns[[1, 2, 4, 6, 8, 10, 12]], axis=1)
 delin_borrowers_df.columns = ['Year', 'Current Repayment', '31-90 days delinquent', '91-180 days delinquent', '181-270 days delinquent', '271-360 days delinquent', 'Default']
 
-
-# In[15]:
-
-
+#Using groupby to group the data and get mean for each year
 delin_borrowers_df = delin_borrowers_df.groupby(['Year']).mean()
 delin_borrowers_df.astype('float').round(1)
+
+#Copying the data into another dataframe for plotting
 delin_borrowers_df_plot = delin_borrowers_df.copy()
 delin_borrowers_df.reset_index(inplace=True)
 
 
-# In[16]:
-
-
+#Reshaping the data to use for creating line plot
 delin_melted_borrow_df = pd.melt(delin_borrowers_df, id_vars=["Year"], value_vars=delin_borrowers_df.columns[1:], var_name="Status", value_name="Value")
-
-
-# In[17]:
 
 
 plt.figure(figsize=(10, 6))
@@ -58,9 +46,6 @@ plt.xticks(rotation=45, fontsize=8)
 
 # Display the plot
 plt.show()
-
-
-# In[ ]:
 
 
 
