@@ -1,7 +1,7 @@
 # %%
 import pandas as pd
 import matplotlib.pyplot as mp
-df = pd.read_csv('Race-Ethnicity-Education-Loan.csv')
+df = pd.read_csv('../data/Race-Ethnicity-Education-Loan.csv')
 
 # %% Only take out columns that are relevant
 new_df = df[['year', 'Category', 'Education_Installment_Loans']].copy()
