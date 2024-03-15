@@ -117,30 +117,6 @@ plt.tight_layout()
 plt.show()
 
 
-# In[34]:
-
-
-plt.figure(figsize=(10, 7), facecolor='white')
-
-plt.pie(df['Balance (in billions)'], labels=df['State'], autopct='', startangle=140)  
-plt.axis('equal') 
-plt.title('State Balance in Billions')
-
-plt.show()
-
-
-# In[35]:
-
-
-plt.figure(figsize=(10, 7), facecolor='white')
-
-plt.pie(df['Borrowers (in thousands)'], labels=df['State'], autopct='', startangle=140)  
-plt.axis('equal')  
-plt.title('State Borrowers in Thousands')
-
-plt.show()
-
-
 # In[36]:
 
 
