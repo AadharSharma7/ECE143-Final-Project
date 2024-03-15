@@ -35,7 +35,7 @@ The packages can be installed by using the following command in the command prom
 ```shell
 conda install <package>
 ```
-where <package> is the third-party package the user wants to install.
+where "package" is the third-party package the user wants to install.
 
 # Running the code
 
