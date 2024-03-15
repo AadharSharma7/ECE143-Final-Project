@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[28]:
+
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -5,14 +11,30 @@ import numpy as np
 import geopandas as gpd
 import plotly.express as px
 
-# read and clean data
-df = pd.read_excel('Portfolio_by_Location.xls')
-df = pd.read_excel("Portfolio_by_Location.xls", skiprows=5, names=["Location", "Balance (in billions)", "Borrowers (in thousands)"])
+
+# In[29]:
+
+
+df = pd.read_excel('../data/Portfolio_by_Location.xls')
+df
+
+
+# In[30]:
+
+
+df = pd.read_excel("../data/Portfolio_by_Location.xls", skiprows=5, names=["Location", "Balance (in billions)", "Borrowers (in thousands)"])
 df = df.iloc[:-1]
+
 df = df.dropna(subset=['Location'])
+
 df = df.reset_index(drop=True)
 
-# add state abbreviation column 
+df
+
+
+# In[31]:
+
+
 us_state_abbrev = {
     'Alabama': 'AL',
     'Alaska': 'AK',
@@ -68,8 +90,12 @@ us_state_abbrev = {
     'Wyoming': 'WY'
 }
 df['State'] = df['Location'].map(us_state_abbrev)
+df
 
-# bar plot for balances vs states
+
+# In[32]:
+
+
 df_sorted = df.sort_values(by='Balance (in billions)')
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Location', y='Balance (in billions)', data=df_sorted, order=df_sorted['Location'])
@@ -78,7 +104,10 @@ plt.xticks(rotation=90)
 plt.tight_layout()
 plt.show()
 
-# bar plot for borroweres vs states
+
+# In[33]:
+
+
 df_sorted = df.sort_values(by='Borrowers (in thousands)')
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Location', y='Borrowers (in thousands)', data=df_sorted, order=df_sorted['Location'])
@@ -87,9 +116,37 @@ plt.xticks(rotation=90)
 plt.tight_layout()
 plt.show()
 
-# geographtical plot for balances
+
+# In[34]:
+
+
+plt.figure(figsize=(10, 7), facecolor='white')
+
+plt.pie(df['Balance (in billions)'], labels=df['State'], autopct='', startangle=140)  
+plt.axis('equal') 
+plt.title('State Balance in Billions')
+
+plt.show()
+
+
+# In[35]:
+
+
+plt.figure(figsize=(10, 7), facecolor='white')
+
+plt.pie(df['Borrowers (in thousands)'], labels=df['State'], autopct='', startangle=140)  
+plt.axis('equal')  
+plt.title('State Borrowers in Thousands')
+
+plt.show()
+
+
+# In[36]:
+
+
 df_usa = df[df['Location'].isin(us_state_abbrev.keys())]
 df_other = df[~df['Location'].isin(us_state_abbrev.keys())] # contains rows "other" and "not reported"
+
 fig_balance = px.choropleth(df_usa, 
                              locationmode='USA-states', 
                              locations='State', 
@@ -97,6 +154,7 @@ fig_balance = px.choropleth(df_usa,
                              scope='usa',
                              title='Balance by State (in billions)',
                              color_continuous_scale='Viridis')
+
 counter = 0
 for i, row in df_other.iterrows():
     fig_balance.add_annotation(
@@ -109,10 +167,15 @@ for i, row in df_other.iterrows():
         font=dict(color="black")
     )
     counter += 1
+
 fig_balance.update_coloraxes(colorbar_title=None)
+
 fig_balance.show()
 
-# geographtical plot for borrowers
+
+# In[37]:
+
+
 fig_borrower = px.choropleth(df_usa, 
                              locationmode='USA-states', 
                              locations='State', 
@@ -120,6 +183,7 @@ fig_borrower = px.choropleth(df_usa,
                              scope='usa',
                              title='Borrowers by State (in thousands)',
                              color_continuous_scale='Viridis')
+
 counter = 0
 for i, row in df_other.iterrows():
     fig_borrower.add_annotation(
@@ -132,6 +196,8 @@ for i, row in df_other.iterrows():
         font=dict(color="black")
     )
     counter += 1
+
 fig_borrower.update_coloraxes(colorbar_title=None)
+
 fig_borrower.show()
 

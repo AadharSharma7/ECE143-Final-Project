@@ -1,7 +1,7 @@
 # %%
 import pandas as pd
 import matplotlib.pyplot as mp
-df = pd.read_excel('Portfolio-by-School-Type.xls')
+df = pd.read_excel('../data/Portfolio_by_School_Type.xls')
 df
 
 # %% Drop the columns that have NA values

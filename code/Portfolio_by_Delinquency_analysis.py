@@ -7,7 +7,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-df = pd.read_excel('Portfolio_by_delinquency.xls', sheet_name="FedManagedPortbyDelinquencyStat")
+df = pd.read_excel('../data/Portfolio_by_delinquency.xls', sheet_name="FedManagedPortbyDelinquencyStat")
 
 
 # In[13]:

@@ -1,15 +1,29 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# read and clean data
-df = pd.read_csv('portfolio_by_percentile_income.csv')
+
+# In[2]:
+
+
+df = pd.read_csv('../data/Portfolio_by_percentile_income.csv')
 df = df.dropna()
 df = df.reset_index(drop=True)
 df['Category'] = df['Category'].replace('Less than 20', '0-19.9')
+df
 
-# bar plots for networth for each percentile
+
+# In[3]:
+
+
 categories = ['0-19.9', '20-39.9', '40-59.9', '60-79.9', '80-89.9', '90-100']
+
 for category in categories:
     filtered_df = df[df['Category'] == category]
     filtered_df = filtered_df.reset_index(drop=True)
@@ -19,9 +33,14 @@ for category in categories:
     plt.tight_layout()
     plt.show()
 
-# heatmaps for each column by percentile
+
+# In[4]:
+
+
 column_names = df.columns.tolist()
+
 column_names = column_names[2:]
+
 for col in column_names:
     pivot_df = df.pivot(index='Category', columns='year', values=col)
     plt.figure(figsize=(10, 6))
@@ -30,3 +49,4 @@ for col in column_names:
     plt.xlabel('Year')
     plt.ylabel('Category')
     plt.show()
+
