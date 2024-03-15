@@ -34,7 +34,7 @@ plot.legend(loc=2, fontsize=13)
 plot.text(-1, -1.5, "*NH = Non Hispanic")
 
 # %% Work status analysis
-df2 = pd.read_csv('Work-Status-Education_Loan.csv')
+df2 = pd.read_csv('../data/Work-Status-Education_Loan.csv')
 
 # %% Only take out columns that are relevant
 new_df2 = df2[['year', 'Category', 'Education_Installment_Loans']].copy()
